@@ -15,6 +15,8 @@
   --light-text: #64748b;
   --border-color: #e2e8f0;
   --success-color: #10b981;
+  --gradient-1: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%);
+  --gradient-2: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
 }
 
 /******* Global Styles ***************/
@@ -163,9 +165,10 @@ nav a:hover {
 #hero {
   background: url('/images/site/small_check.jpg') center/cover no-repeat;
   color: white;
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
   text-align: center;
   position: relative;
+  overflow: hidden;
 }
 
 #hero::before {
@@ -175,7 +178,8 @@ nav a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(30, 58, 138, 0.8);
+  background: var(--gradient-1);
+  opacity: 0.85;
   z-index: 1;
 }
 
@@ -186,186 +190,350 @@ nav a:hover {
 }
 
 #hero .hero-content {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  animation: slideInDown 0.8s ease-out;
 }
 
-#hero h1 {
-  font-size: 2rem;
+.hero-title {
+  font-size: 2.5rem;
   margin: 0 0 0.5rem 0;
-  font-weight: bold;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-#hero h2 {
-  font-size: 1.3rem;
+.brand-accent {
+  background: var(--gradient-2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
   margin: 0;
   font-weight: 300;
   opacity: 0.95;
+  letter-spacing: 0.5px;
 }
 
 .hero-promo {
-  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   color: var(--dark-text);
-  padding: 1.5rem;
-  border-radius: 8px;
+  padding: 2.5rem;
+  border-radius: 20px;
+  max-width: 1100px;
   margin: 0 auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideInUp 0.8s ease-out;
 }
 
 .promo-text {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 }
 
-.promo-text h3 {
-  font-size: 1.5rem;
-  margin: 0 0 1rem 0;
+.promo-title {
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
   color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .features {
   list-style: none;
   padding: 0;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .features li {
-  padding: 0.5rem 0;
+  padding: 0.75rem 1rem;
   position: relative;
-  padding-left: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(90deg, rgba(15, 118, 110, 0.05) 0%, transparent 100%);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
-.features li:before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: var(--success-color);
-  font-weight: bold;
+.features li:hover {
+  background: linear-gradient(90deg, rgba(15, 118, 110, 0.1) 0%, transparent 100%);
+  transform: translateX(5px);
+}
+
+.feature-icon {
+  font-size: 1.3rem;
 }
 
 .own-today-image {
-  max-width: 200px;
+  max-width: 220px;
   height: auto;
-  margin-top: 1rem;
+  margin: 1.5rem auto 0;
   display: block;
-}
-
-.cta-button {
-  background-color: var(--accent-color);
-  color: white;
-  border: none;
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  border-radius: 4px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
 }
 
-.cta-button:hover {
-  background-color: #d84a05;
+.own-today-image:hover {
+  transform: scale(1.05);
 }
 
 .promo-image {
-  margin-top: 1.5rem;
-  flex: 1.5; /* Make image span more */
+  margin-top: 0;
+  flex: 1.5;
+}
+
+.image-wrapper {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.image-wrapper:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
 }
 
 .promo-image img {
   max-width: 100%;
   height: auto;
-  border-radius: 4px;
+  display: block;
+  border-radius: 16px;
 }
 
 /******* Reviews Section ***************/
 #reviews {
-  padding: 2rem 1rem;
-  background-color: var(--light-bg);
+  padding: 4rem 1rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  position: relative;
 }
 
-#reviews h2 {
+#reviews::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-2);
+}
+
+.section-header {
   text-align: center;
-  font-size: 1.8rem;
-  margin: 0 0 2rem 0;
+  margin-bottom: 3rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+#reviews h2,
+#upgrades h2 {
+  font-size: 2.2rem;
+  margin: 0 0 0.5rem 0;
   color: var(--primary-color);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--light-text);
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .reviews-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .review-card {
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  border-left: 4px solid var(--accent-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.review-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.review-card:hover::before {
+  transform: scaleX(1);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .review-text {
   font-style: italic;
-  margin: 0 0 0.5rem 0;
+  margin: 0;
   color: var(--dark-text);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 .stars {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #fbbf24;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 .rating {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--light-text);
-  margin: 0.5rem 0 0 0;
+  margin: 0;
+  font-weight: 600;
 }
 
 /******* Upgrades Section ***************/
 #upgrades {
-  padding: 2rem 1rem;
-}
-
-#upgrades h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin: 0 0 2rem 0;
-  color: var(--primary-color);
+  padding: 4rem 1rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 
 .upgrades-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .upgrade-card {
-  background-color: white;
-  border-radius: 8px;
+  background: white;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.upgrade-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-1);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 16px;
+  pointer-events: none;
 }
 
 .upgrade-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-12px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+.upgrade-card:hover .upgrade-image-wrapper {
+  transform: scale(1.05);
+}
+
+.upgrade-image-wrapper {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+  transition: transform 0.4s ease;
 }
 
 .upgrade-card img {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
 }
 
 .upgrade-card h3 {
-  margin: 1rem;
+  margin: 1.5rem 1.5rem 0.5rem;
   color: var(--primary-color);
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.upgrade-desc {
+  margin: 0 1.5rem 1.5rem;
+  color: var(--light-text);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/******* Animations ***************/
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /******* Footer Styles ***************/
@@ -384,50 +552,71 @@ footer {
 
 /******* Tablet and Large Screen Styles ***************/
 @media (min-width: 768px) {
-  #hero h1 {
-    font-size: 2.5rem;
+  .hero-title {
+    font-size: 3.2rem;
   }
 
-  #hero h2 {
-    font-size: 1.5rem;
+  .hero-subtitle {
+    font-size: 1.4rem;
   }
 
   .hero-promo {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: row;
+    gap: 2.5rem;
     align-items: center;
-    padding: 2rem;
+    padding: 3rem;
   }
 
   .promo-text {
-    flex: none;
-    text-align: center;
+    flex: 1;
+    text-align: left;
     margin-bottom: 0;
-    order: -1; /* Text appears above image */
+    order: 0;
+  }
+
+  .promo-title {
+    font-size: 2.2rem;
+    text-align: left;
+  }
+
+  .features {
+    text-align: left;
+  }
+
+  .own-today-image {
+    margin: 1.5rem 0 0 0;
   }
 
   .promo-image {
     flex: 1.5;
     margin-top: 0;
-    max-width: 600px; /* Make image span more */
+    max-width: none;
   }
 
   .reviews-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 
   .upgrades-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    gap: 2rem;
+  }
+
+  .upgrade-card {
+    flex-direction: column;
+  }
+
+  .upgrade-image-wrapper {
+    height: 220px;
   }
 
   #reviews h2,
   #upgrades h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .hamburger {
@@ -448,5 +637,11 @@ footer {
 
   #top-header {
     justify-content: space-between;
+  }
+}
+
+@media (min-width: 1024px) {
+  .reviews-container {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
